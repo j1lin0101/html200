@@ -11,12 +11,31 @@ function bank() {
                 userQuit = true;
                 break;
             case "W":
-                let withdrawal = prompt("Enter an amount to withdaw: ");
+                let withdrawal = prompt("Enter an amount to withdraw: ");
+
+                if (withdrawal > totalMoney) {
+                    alert("Excessive Withdrawal. You don't have that much money to take");
+                    break;
+                } else if ((totalMoney - withdrawal) < 300) {
+                    let lowBalancePrompt = prompt("Your withdrawal will leave you with less than $300. Are you sure you want to withdraw?");
+                    if (lowBalancePrompt == "yes") {
+                        totalMoney = totalMoney - Number(withdrawal);
+                        alert("Your total balance is: " + totalMoney);
+                        break;
+                    }
+                    break;
+                }
+
                 totalMoney = totalMoney - Number(withdrawal);
                 alert("Your total balance is: " + totalMoney);
                 break;
+
             case "D":
                 let deposit = prompt("Enter an amount to deposit: ");
+                if (deposit > 50000) {
+                    alert("You cannot deposit amounts greater than $50,000");
+                    break;
+                }
                 totalMoney = totalMoney + Number(deposit);
                 alert("Your total balance is: " + totalMoney);
                 break;
